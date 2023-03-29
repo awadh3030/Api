@@ -130,7 +130,14 @@ public class Apijosn {
 			resultSet.close();
 		 break;
 		
-		
+		 case 4:
+			 Statement stmt = null;
+			 
+		 String sql1 = "DROP TABLE University";
+
+		 stmt.executeUpdate(sql1);
+         
+         break;
 	    
 		 }
 	        
