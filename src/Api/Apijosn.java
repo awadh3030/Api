@@ -1,6 +1,7 @@
 package Api;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.Connection;
@@ -33,7 +34,9 @@ public class Apijosn {
 		System.out.println("1 CREATE TABLES");
 		System.out.println("2 INSERT INTO data");
 		System.out.println("3 Get the data");
-
+		System.out.println("4 Delete tabls");
+		System.out.println("5 backup");
+		
 		
 		
 		 String apiUrl = "http://universities.hipolabs.com/search?country=Oman";
@@ -131,13 +134,36 @@ public class Apijosn {
 		 break;
 		
 		 case 4:
-			 Statement stmt = null;
+			 
 			 
 		 String sql1 = "DROP TABLE University";
 
-		 stmt.executeUpdate(sql1);
+		 st.executeUpdate(sql1);
          
          break;
+         
+         
+         
+		 case 5:
+         resultSet = st.executeQuery("SELECT * FROM University");
+         PrintWriter writer = new PrintWriter("backup.sql");
+         writer.println("-------------------------------------------------------------------");
+         writer.println(" Universities:");
+         writer.println("-------------------------------------------------------------------");
+         while (resultSet.next()) {
+         String name = resultSet.getString("name");
+         String webPage = resultSet.getString("webpages");
+         String domain = resultSet.getString("domains");
+         writer.println("----------------------------------------------------------");
+         writer.println(name + " | "+ "\t" + domain + " | "+ "\t" + webPage);
+         }
+         writer.close();
+         System.out.println("Data dumped to file successfully.");
+         
+         
+         
+         break;
+         
 	    
 		 }
 	        
