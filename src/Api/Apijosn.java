@@ -23,6 +23,18 @@ public class Apijosn {
 		
 		Scanner sca= new Scanner(System.in);
 		
+
+		System.out.println("Enter username");
+		String username = sca.next();
+
+		System.out.println("Enter password");
+		String password = sca.next();
+		
+		System.out.println("1 CREATE TABLES");
+		System.out.println("2 INSERT INTO data");
+		System.out.println("3 Get the data");
+
+		
 		
 		 String apiUrl = "http://universities.hipolabs.com/search?country=Oman";
 		 try {
@@ -47,6 +59,12 @@ public class Apijosn {
 					+ "trustServerCertificate=true";
 			String user = "sa";
 			String pass = "root";
+			
+
+			
+			if (username.equals(user) && password.equals(pass)) {
+				
+			
 			Connection con = null;
 			Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver")
 					.newInstance();
@@ -56,6 +74,7 @@ public class Apijosn {
 		
 		 int a = sca.nextInt();
 		 switch (a) {
+		 
 		 case 1:
 				String sql = "CREATE TABLE University (Name VARCHAR(255), Country VARCHAR(255),  "
 						+ "AlphaTwoCode VARCHAR(2), Domains VARCHAR(255),"
@@ -101,7 +120,7 @@ public class Apijosn {
 			System.out.println("                Universities in " + country1 + ":");
 			System.out.println("*******************************************************************");
 			while (resultSet.next()) {
-				//int id = resultSet.getInt("id");
+			
 				String name = resultSet.getString("name");
 				String webPage = resultSet.getString("webpages");
 				String domain = resultSet.getString("domains");
@@ -114,7 +133,9 @@ public class Apijosn {
 		
 	    
 		 }
-	        } catch (Exception e) {
+	        
+			}
+			} catch (Exception e) {
 	            e.printStackTrace();
 	        }
 		 
